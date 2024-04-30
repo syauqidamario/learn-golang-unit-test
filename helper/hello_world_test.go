@@ -73,3 +73,27 @@ func TestSubTest(t *testing.T){
 		require.Equal(t, "Hi Damario Djohan", result)
 	})
 }
+
+//Table test = providing a slice data contained with parameters and expected results
+//Slice is then iterated using a sub-test
+
+func TestHelloWorldTable(t*testing.T){
+	tests :=[]struct{
+		name string
+		request string
+		expected string
+	}{
+		{
+			name: "HelloWorld(Syauqi)",
+			request: "Syauqi",
+			expected: "Hi Syauqi",
+		},
+	}
+
+	for _, test := range tests{
+		t.Run(test.name, func(t *testing.T){
+			result := HelloWorld(test.request)
+			require.Equal(t, test.expected, result)
+		})
+	}
+}
