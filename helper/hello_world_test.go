@@ -53,3 +53,11 @@ func TestSkip(t *testing.T){
 	result := HelloWorld("Syauqi")
 	require.Equal(t, "Hi Syauqi", result)
 }
+
+//testing.M parameter is to manage an unit test's execution
+//if a TestMain function exists, it would automatically execute the function when a unit test runs in a package
+func TestMain(m *testing.M){
+	fmt.Println("Before Unit Test")
+	m.Run() //this will execute ALL unit test
+	fmt.Println("After Unit Test")
+}
