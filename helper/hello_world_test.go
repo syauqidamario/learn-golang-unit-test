@@ -61,3 +61,15 @@ func TestMain(m *testing.M){
 	m.Run() //this will execute ALL unit test
 	fmt.Println("After Unit Test")
 }
+
+//Go-Lang supports the creation of unit test functions inside a unit test functions using the Run() function
+func TestSubTest(t *testing.T){
+	t.Run("Syauqi", func(t *testing.T){
+		result := HelloWorld("Syauqi")
+		require.Equal(t, "Hi Syauqi", result)
+	})
+	t.Run("Damario Djohan", func(t *testing.T){
+		result := HelloWorld("Damario Djohan")
+		require.Equal(t, "Hi Damario Djohan", result)
+	})
+}
