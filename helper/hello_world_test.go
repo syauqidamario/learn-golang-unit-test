@@ -97,3 +97,101 @@ func TestHelloWorldTable(t*testing.T){
 		})
 	}
 }
+
+func BenchmarkTable(b *testing.B) {
+	benchmarks := []struct {
+		name    string
+		request string
+	}{
+		{
+			name:    "Syauqi",
+			request: "Syauqi",
+		},
+		{
+			name:    "Damario",
+			request: "Damario",
+		},
+		{
+			name:    "SyauqiDamarioDjohan",
+			request: "Syauqi Damario Djohan",
+		},
+		{
+			name:    "Budi",
+			request: "Budi Nugraha",
+		},
+	}
+
+	for _, benchmark := range benchmarks {
+		b.Run(benchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				HelloWorld(benchmark.request)
+			}
+		})
+	}
+}
+
+func BenchmarkSub(b *testing.B) {
+	b.Run("Syauqi", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWorld("Syauqi")
+		}
+	})
+	b.Run("Damario", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWorld("Damario")
+		}
+	})
+}
+
+func BenchmarkHelloWorld(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		HelloWorld("Syauqi")
+	}
+}
+
+func BenchmarkHelloWorldDamario(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		HelloWorld("Damario")
+	}
+}
+
+func TestTableHelloWorld(t *testing.T) {
+	tests := []struct {
+		name     string
+		request  string
+		expected string
+	}{
+		{
+			name:     "Syauqi",
+			request:  "Syauqi",
+			expected: "Hello Syauqi",
+		},
+		{
+			name:     "Damario",
+			request:  "Damario",
+			expected: "Hello Damario",
+		},
+		{
+			name:     "Djohan",
+			request:  "Djohan",
+			expected: "Hello Djohan",
+		},
+		{
+			name:     "Budi",
+			request:  "Budi",
+			expected: "Hello Budi",
+		},
+		{
+			name:     "Joko",
+			request:  "Joko",
+			expected: "Hello Joko",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := HelloWorld(test.request)
+			require.Equal(t, test.expected, result)
+		})
+	}
+}
